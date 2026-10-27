@@ -1,0 +1,28 @@
+# docker compose up --build        (run `python -m ml.train` first so artifacts/ exists)
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: driftguard
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-driftguard}
+      POSTGRES_DB: driftguard
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U driftguard"]
+      interval: 5s
+      retries: 10
+  api:
+    build: { context: ., dockerfile: backend/Dockerfile }
+    environment:
+      DATABASE_URL: postgresql+psycopg://driftguard:${DB_PASSWORD:-driftguard}@db:5432/driftguard
+      API_KEY: ${API_KEY:-change-me}
+    depends_on: { db: { condition: service_healthy } }
+    ports: ["8000:8000"]
+  web:
+    build: { context: ., dockerfile: frontend/Dockerfile }
+    environment:
+      API_KEY: ${API_KEY:-change-me}
+    depends_on: [api]
+    ports: ["8080:80"]
+volumes:
+  pgdata:

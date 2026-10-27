@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #f6f6f4; --surface: #fcfcfb; --border: #e3e2dd;
+  --text: #0b0b0b; --text-2: #52514e; --text-3: #7a7974; --grid: #ebeae6;
+  --flows: #2a78d6;      /* categorical slot 1 */
+  --alerts: #eb6834;     /* categorical slot 2 */
+  --good: #0b7a3b; --warn: #a15c00; --crit: #c42b2b;
+  --seq-1: #cde2fb; --seq-3: #6da7ec; --seq-5: #256abf;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --border: #2d2d2a;
+    --text: #f0efec; --text-2: #c3c2b7; --text-3: #8f8e86; --grid: #2a2a28;
+    --flows: #3987e5; --alerts: #d95926;
+    --good: #4cc27a; --warn: #e0a040; --crit: #ee6b6b;
+    --seq-1: #184f95; --seq-3: #3987e5; --seq-5: #9ec5f4;
+  }
+}
+body { background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.muted { color: var(--text-2); }
+.faint { color: var(--text-3); }
+.num { font-variant-numeric: tabular-nums; }
+table.dg { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.dg th { text-align: left; font-weight: 500; color: var(--text-3); padding: 6px 8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+table.dg td { padding: 7px 8px; border-bottom: 1px solid var(--border); }
+table.dg tr:last-child td { border-bottom: 0; }
+.recharts-cartesian-grid line { stroke: var(--grid); }
+.recharts-text { fill: var(--text-3); font-size: 11px; }

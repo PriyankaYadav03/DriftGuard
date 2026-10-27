@@ -1,0 +1,11 @@
+server {
+  listen 80;
+  root /usr/share/nginx/html;
+  location / { try_files $uri /index.html; }
+  # The browser never sees the API key: nginx adds it when proxying.
+  location /api/ {
+    proxy_pass http://api:8000/;
+    proxy_set_header X-API-Key ${API_KEY};
+    proxy_set_header Host $host;
+  }
+}

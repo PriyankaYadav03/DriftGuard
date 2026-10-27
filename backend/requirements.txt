@@ -1,0 +1,10 @@
+# API runtime. scikit-learn/numpy/pandas MUST match the training environment (the model is a pickle).
+fastapi==0.143.3
+uvicorn[standard]==0.53.0
+sqlalchemy==2.1.5
+psycopg[binary]>=3.2
+pydantic==2.13.5
+numpy==2.5.3
+pandas==3.0.5
+scikit-learn==1.9.1
+joblib==1.6.0
